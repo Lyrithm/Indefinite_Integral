@@ -1,0 +1,187 @@
+\documentclass[12pt, a4paper, oneside]{ctexart}
+\usepackage{geometry, lipsum, rotating, setspace, amsmath, amsthm, amssymb, graphicx, extarrows}
+\geometry{a4paper,hmargin=0.8in,vmargin=0.8in}
+\makeatletter
+\renewcommand{\@maketitle}{%
+  \newpage
+  \null
+  \vskip 2em%
+  \begin{center}%
+    {\LARGE \@title \par}%
+  \end{center}%
+  \vskip 1.5em%
+  \begin{center}%
+    {\large \@date}%
+  \end{center}%
+  \par
+}
+\makeatother
+\title{Summary of a Class of Indefinite Integral}
+\date{6th Oct. 2024}
+\begin{document}
+    \maketitle
+    \section*{Preparation}
+    \begin{gather*}
+        a\in\mathbb{R}_{\text{const}}~,~pq\ne0~,~p=p(t),q=q(t)\\
+        \begin{array}{cccl}
+            \text{Re} \!\!\!& p^2+q^2=a^2 & \!\!\!\!\!\!\!\!\!\Rightarrow p\text{d}p+q\text{d}q=0 
+            & \!\!\!\Leftrightarrow\dfrac{q\text{d}p}{q^2}=\dfrac{-p\text{d}q}{p^2}=\dfrac{1}{1+\left( \dfrac{p}{q} \right)^2}\dfrac{q\text{d}p-p\text{d}q}{q^2}
+            =\text{d}\arctan\dfrac{p}{q}\\
+            \text{Im} \!\!\!& \begin{cases}
+                p^2+a^2=q^2\\
+                p^2-a^2=q^2\\
+            \end{cases}
+            & \!\!\!\!\!\!\!\!\!\Rightarrow pdq=q\text{d}q & \!\!\!\Leftrightarrow \dfrac{\text{d}p}{q}=\dfrac{\text{d}q}{p}=\dfrac{\text{d}(p+q)}{p+q}
+            =\text{d}\ln (p+q)\\
+        \end{array}\\
+        \text{Simplify:}
+        \begin{cases}
+            p\mapsto ap\\
+            q\mapsto aq\\
+        \end{cases}
+        \Rightarrow 
+        \left\{
+            \begin{array}{ll}
+                \text{Re} & p^2+q^2=1\\
+                \text{Im} & \pm p^2\mp q^2=1\\
+            \end{array}
+        \right .\\
+        \text{Re}(+),\text{Im}(-):
+        \begin{cases}
+            \displaystyle\int f(p,q)\cdot\frac{\text{d}p}{q}=\int f(p,q)\cdot\frac{p\text{d}q-q\text{d}p}{p^2\pm q^2}\\
+            \displaystyle\int f(p,q)\cdot\frac{\text{d}p}{q^2}=\text{sgn}(q)\int f(p,q)\cdot\frac{\text{d}\dfrac{p}{q}}{\sqrt{\left| 1\pm \left( \dfrac{p}{q} \right)^2 \right|}}\\
+            \displaystyle\int f(p,q)\cdot\frac{\text{d}p}{q^3}=\frac{1}{q^2\pm p^2}\int f(p,q)\cdot\text{d}\frac{p}{q}\\
+        \end{cases}
+    \end{gather*}
+    We note that the status of $p$ and $q$ are equivalent.
+    \section*{Application}
+    \begin{equation*}
+        \begin{split}
+            &x^2\pm y^2 = 1,
+            \begin{cases}
+                \vspace{5pt}
+                \displaystyle I_n^{\pm}:=\int \frac{\text{d}x}{y^{2n+1}}\\
+                \vspace{5pt}
+                \displaystyle J_n^{\pm}:=\int\frac{\text{d}x}{y^{2n+2}}\\
+                \vspace{5pt}
+                \displaystyle K_n:=\frac{x}{y^n}\\
+            \end{cases},
+            \begin{cases}
+                \vspace{5pt}
+                \displaystyle P_n^{\pm}:=\int y^{2n+1}\text{d}x\\
+                \vspace{5pt}
+                \displaystyle Q_n^{\pm}:=\int y^{2n+2}\text{d}x\\
+                \vspace{5pt}
+                \displaystyle R_n:=xy^n\\
+            \end{cases},
+            n\in\mathbb{N}\\
+        \end{split}
+    \end{equation*}
+    $x^2+y^2=1:$
+    \begin{equation*}
+        \begin{split}
+            I_n^+ &= \int \frac{x^2+y^2}{y^{2n+1}}\text{d}x\\
+            &= \int \frac{x^2\text{d}x}{y^{2n+1}}+I_{n-1}^+\\
+            &= -\int \frac{x\text{d}y}{y^{2n}}+I_{n-1}^+\\
+            &= \frac{(2n-2)!!(2n-3)!!}{(2n-1)!!(2n-2)!!}K_{2n-1}+\frac{(2n-2)!!(2n-3)!!}{(2n-1)!!(2n-4)!!}I_{n-1}^+\\
+            &= \frac{(2n-2)!!}{(2n-1)!!}\int \frac{\text{d}x}{y^3}+\sum_{k=2}^{n}\frac{(2n-2)!!(2k-3)!!}{(2n-1)!!(2k-2)!!}K_{2k-1}\\
+            &= \frac{(2n-2)!!}{(2n-1)!!}\frac{x}{y}+\sum_{k=2}^{n}\frac{(2n-2)!!(2k-3)!!}{(2n-1)!1(2k-2)!!}\frac{x}{y^{2k-1}}\\
+            &= \frac{(2n-2)!!}{(2n-1)!!}\sum_{k=1}^{n}\frac{(2k-3)!!}{(2k-2)!!}\frac{x}{y^{2k-1}}\\
+            P_n^+ &= \int y^{2n-1}\left(1-x^2\right)\text{d}x\\
+            &= -\int x^2y^{2n-1}\text{d}x+\int y^{2n-1}\text{d}x\\
+            &= \int y^{2n}\text{d}x+P_{n-1}^+\\
+            &= \frac{1}{2n+1}xy^{2n+1}-\frac{1}{2n+1}P_n^++P_{n-1}^+\\
+            &= \frac{1}{2n+1}R_{2n+1}+\frac{2n+1}{2n+2}P_{n-1}^+\\
+            &= \frac{(2n+1)!!(2)!!}{(2n+2)!!}\int y\text{d}x +\frac{(2n+1)!!}{(2n+2)!!}\sum_{k=2}^{n}\frac{(2k)!!}{(2k+1)!!}R_{2k+1}\\
+            &= \frac{(2n+1)!!}{(2n+2)!!}\int \left( y\text{d}x+x\text{d}y+\frac{y\text{d}x-x\text{d}y}{x^2+y^2} \right)+\frac{(2n+1)!!}{(2n+2)!!}\sum_{k=1}^{n}\frac{(2k)!!x}{(2k+1)!!}y^{2k+1}\\
+            &= \frac{(2n+1)!!}{(2n+2)!!}\int\frac{\text{d}x}{y}+\frac{(2n+1)!!}{(2n+2)!!}\sum_{k=0}^{n}\frac{(2k)!!x}{(2k+1)!!}y^{2k+1}\\
+        \end{split}
+    \end{equation*}
+    Similarly:
+    \begin{equation*}
+        \begin{split}
+            J_n^+ &=\frac{1}{2n}K_{2n}+\frac{2n-1}{2n}J_{n-1}^+\\
+            &= \frac{(2n-1)!!}{(2n)!!}\int\frac{\text{d}x}{y^2}+\sum_{k=1}^{n}\frac{(2n-1)!!(2k-2)!!}{(2n)!!(2k-1)!y^{2k}}x\\
+            Q_n^+ &= \frac{1}{2n+3}R_{2n+2}+\frac{2n+2}{2n+3}Q_{n-1}^+\\
+            &=\frac{(2n+2)!!}{(2n+3)!!}\sum_{k=0}^{n+1}\frac{(2k-1)!!}{(2k)!!}xy^{2k}\\
+        \end{split}
+    \end{equation*}
+    $x^2-y^2=1:$
+    \begin{equation*}
+        \begin{split}
+            I_n^- &=\int \frac{x^2-y^2}{y^{2n+1}}\text{d}x\\
+            &= \int \frac{x\text{d}y}{y^{2n}}-I_{n-1}^-\\
+            &= -\frac{1}{2n-1}K_{2n-1}-\frac{2n-2}{2n-1}I_{n-1}^-\\
+            &= -\frac{(2n-2)!!}{(2n-1)!!}\sum_{k=1}^{n}\frac{(2k-3)!!(-1)^{n-k}}{(2k-2)!!y^{2k-1}}x\\
+            P_n^-&=\int y^{2n-1}\left( x^2-1 \right)\text{d}x\\
+            &= \int xy^{2n}\text{d}y-P_{n-1}^-\\
+            &= \frac{1}{2n+2}R_{2n+1}-\frac{2n+1}{2n+2}P_{n-1}^-\\
+            &= -\frac{(2n+1)!!}{(2n+2)!!}(-1)^n\int\frac{\text{d}x}{y}+\frac{(2n+1)!!}{(2n+2)!!}\sum_{k=0}^{n}\frac{(2k)!!(-1)^{n-k}}{(2k+1)!!}xy^{2k+1}\\
+            J_n^- &= \int \frac{x^2-y^2}{y^{2n+2}}\text{d}x\\
+            &= \int \frac{x\text{d}y}{y^{2n+1}}-J_{n-1}^-\\
+            &= -\frac{1}{2n}K_{2n}-\frac{2n-1}{2n}J_{n-1}^-\\
+            &= -\frac{(2n-1)!!}{(2n)!!}(-1)^n\int\frac{\text{d}x}{y^2}-\sum_{k=1}^{n}\frac{(2n-1)!!(2k-2)!!}{(2n)!!(2k-1)!!y^{2k}}(-1)^{n-k}x\\
+            Q_n^-&=\int y^{2n}\left( x^2-1 \right)\text{d}x\\
+            &= \int xy^{2n+1}\text{d}x-Q_{n-1}^-\\
+            &= \frac{1}{2n+3}R_{2n+2}-\frac{2n+2}{2n+3}Q_{n-1}^-\\
+            &= \frac{(2n+2)!!}{(2n+3)!!}\sum_{k=0}^{n+1}\frac{(2k-1)!!}{(2k)!!}(-1)^{n-k}xy^{2k}\\
+            \Rightarrow &
+            \left \{
+                \begin{array}{l}
+                    \vspace{5pt}
+                    \displaystyle I_n^{\pm}:=\int \frac{\text{d}x}{y^{2n+1}}=\displaystyle\frac{(2n-2)!!}{(2n-1)!!}\sum_{k=1}^{n}\frac{(2k-3)!!(\pm1)^{n-k+1}}{(2k-2)!!y^{2k-1}}x\\
+                    \vspace{5pt}
+                    \displaystyle J_n^{\pm}:=\int\frac{\text{d}x}{y^{2n+2}}=\displaystyle\frac{(2n-1)!!}{(2n)!!}(\pm1)^{n+1}\int\frac{\text{d}x}{y^2}+\sum_{k=1}^{n}\frac{(2n-1)!!(2k-2)!!}{(2n)!!(2k-1)!!y^{2k}}(\pm1)^{n-k+1}x\\
+                    \vspace{5pt}
+                    \displaystyle P_n^{\pm}:=\int y^{2n+1}\text{d}x=\displaystyle\frac{(2n+1)!!}{(2n+2)!!}(\pm1)^{n+1}\int\frac{\text{d}x}{y}+\frac{(2n+1)!!}{(2n+2)!!}\sum_{k=0}^{n}\frac{(2k)!!(\pm1)^{n-k}}{(2k+1)!!}xy^{2k+1}\\
+                    \vspace{5pt}
+                    \displaystyle Q_n^{\pm}:=\int y^{2n+2}\text{d}x=\displaystyle\frac{(2n+2)!!}{(2n+3)!!}\sum_{k=0}^{n+1}\frac{(2k-1)!!}{(2k)!!}(\pm1)^{n-k}xy^{2k}\\
+                \end{array}
+            \right .\\
+        \end{split}
+    \end{equation*}
+    \section*{Example}
+    \begin{equation*}
+        \begin{split} 
+            &
+            \begin{cases}
+                x=\sin t\\
+                y=\cos t\\
+            \end{cases},
+            \begin{cases}
+                \vspace{5pt}
+                \displaystyle I_n^+=\int \frac{\text{d}t}{\cos^{2n}t}=\frac{(2n-2)!!}{(2n-1)!!}\sum_{k=1}^{n}\frac{(2k-3)!!}{(2k-2)!!}\frac{\sin t}{\cos^{2k-1}t}\\
+                \vspace{5pt}
+                \displaystyle Q_n^+=\int \cos^{2n+3}t\text{d}t =\frac{(2n+2)!!}{(2n+3)!!}\sum_{k=0}^{n+1}\frac{(2k-1)!!}{(2k)!!}\sin (t) \cos^{2k}(t)\\
+            \end{cases}\\
+            &
+            \begin{cases}
+                x=\cosh t\\
+                y=\sinh t\\
+            \end{cases}\!\!\!,
+            \begin{cases}
+                \vspace{5pt}
+                \displaystyle I_n^-=\int\frac{\text{d}t}{\text{sh}^{2n}t}=\sum_{k=1}^{n}\frac{(2n-2)!!(2k-3)!!(-1)^{n-k+1}}{(2n-1)!!(2k-2)!!\sinh^{2k-1}t}\cosh t\\
+                \vspace{5pt}
+                \displaystyle Q_n^-=\int \text{sh}^{2n+3}t\text{d}t =\frac{(2n+2)!!}{(2n+3)!!}\sum_{k=0}^{n+1}\frac{(2k-1)!!}{(2k)!!}(-1)^{n-k}\text{ch} (t) \text{sh}^{2k}(t)\\
+            \end{cases}
+        \end{split}
+    \end{equation*}
+    $
+    \begin{cases}
+        x=x\\
+        y=\sqrt{1-x^2}\\
+    \end{cases}
+    $:
+    \begin{equation*}
+        \begin{split}
+            \int x^{2n+1}y\text{d}x &=\frac{x^{2n+2}y}{2n+2}-\frac{1}{2n+2}\int x^{2n+2}\text{d}y\\
+            &=\frac{x^{2n+2}y}{2n+2}-\frac{1}{2n+2}Q_{n}^+\\
+            &=\frac{x^{2n+2}y}{2n+2}-\sum_{k=0}^{n+1}\frac{(2n)!!(2k-1)!!}{(2n+3)!!(2k)!!}(-1)^{n-k}x^{2k}\sqrt{1-x^2}\\
+            \int x^{2n}y\text{d}x &=\frac{x^{2n+1}y}{2n+1}-\frac{1}{2n+1}\int x^{2n+1}\text{d}y\\
+            &=\frac{x^{2n+1}y}{2n+1}-\frac{1}{2n+1}P_n^+\\
+            &=\frac{x^{2n+1}y}{2n+1}-\frac{(2n)!!(-1)^{n+1}}{(2n+2)!!}\int\frac{\text{d}y}{x}-\frac{(2n-1)!!}{(2n+1)!!}\sum_{k=0}^{n}\frac{(2k)!!(-1)^{n-k}}{(2k+1)!! }x^{2k+1}\sqrt{1-x^2}\\
+            &=\frac{x^{2n+1}y}{2n+1}+\frac{(2n)!!(-1)^n}{(2n+2)!!}\arccos x-\frac{(2n-1)!!}{(2n+1)!!}\sum_{k=0}^{n}\frac{(2k)!!(-1)^{n-k}}{(2k+1)!! }x^{2k+1}\sqrt{1-x^2}\\
+        \end{split}
+    \end{equation*}
+\end{document}
